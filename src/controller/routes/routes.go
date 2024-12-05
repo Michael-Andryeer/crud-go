@@ -1,9 +1,12 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/Michael-Andryeer/crud-go/src/controller"
+	"github.com/gin-gonic/gin"
+)
 
 // inicializar as rotas da aplicação
-func initRoutes(r *gin.RouterGroup) {
+func InitRoutes(r *gin.RouterGroup) {
 	r.GET("/getUserById/:userId", controller.FindUserById)
 	r.GET("/getUserByEmail/:userEmail", controller.FindUserByEmail)
 	r.POST("/createUser", controller.CreateUser)
