@@ -7,7 +7,6 @@ import (
 
 // inicializar as rotas da aplicação
 func InitRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
-
 	r.GET("/getUserById/:userId", userController.FindUserById)
 	r.GET("/getUserByEmail/:userEmail", userController.FindUserByEmail)
 	r.POST("/createUser", userController.CreateUser)
