@@ -5,16 +5,10 @@ import (
 
 	"github.com/Michael-Andryeer/crud-go/src/configuration/logger"
 	"github.com/Michael-Andryeer/crud-go/src/configuration/validation"
-	"github.com/Michael-Andryeer/crud-go/src/controller/model"
 	"github.com/Michael-Andryeer/crud-go/src/controller/model/request"
 	"github.com/Michael-Andryeer/crud-go/src/model"
 	"github.com/Michael-Andryeer/crud-go/src/model/service"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
-)
-
-var (
-	UserDomainInterface model.UserDomainInterface
 	"go.uber.org/zap"
 )
 
@@ -47,7 +41,6 @@ func CreateUser(c *gin.Context) {
 		c.JSON(err.Code, err)
 		return
 	}
-
 
 	logger.Info("User created successfully",
 		zap.String("journey", "createUser"),
