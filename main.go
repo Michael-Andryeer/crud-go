@@ -6,10 +6,7 @@ import (
 
 	"github.com/Michael-Andryeer/crud-go/src/configuration/database/mongodb"
 	"github.com/Michael-Andryeer/crud-go/src/configuration/logger"
-	"github.com/Michael-Andryeer/crud-go/src/controller"
 	"github.com/Michael-Andryeer/crud-go/src/controller/routes"
-	"github.com/Michael-Andryeer/crud-go/src/model/repository"
-	"github.com/Michael-Andryeer/crud-go/src/model/service"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -25,10 +22,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error connecting to database: %s \n", err.Error())
 	}
-	//Inicializar dependencias
-	repo := repository.NewUserRepository(database)
-	service := service.NewUserDomainService(repo)
-	userController := controller.NewUserControllerInterface(service)
+
+	userController := initDependencies(database)
 
 	router := gin.Default()
 
