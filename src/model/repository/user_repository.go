@@ -32,6 +32,10 @@ type UserRepository interface {
 		userDomain model.UserDomainInterface,
 	) *rest_errors.RestError
 
+	DeleteUser(
+		userId string,
+	) *rest_errors.RestError
+
 	FindUserByEmail(
 		email string,
 	) (model.UserDomainInterface, *rest_errors.RestError)

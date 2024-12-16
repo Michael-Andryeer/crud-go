@@ -6,7 +6,7 @@ import (
 )
 
 type UserControllerInterface interface {
-	DeleteUserById(c *gin.Context)
+	DeleteUser(c *gin.Context)
 	FindUserById(c *gin.Context)
 	FindUserByEmail(c *gin.Context)
 	UpdateUser(c *gin.Context)
