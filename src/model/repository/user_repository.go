@@ -27,6 +27,11 @@ type UserRepository interface {
 		userDomain model.UserDomainInterface,
 	) (model.UserDomainInterface, *rest_errors.RestError)
 
+	UpdateUser(
+		userId string,
+		userDomain model.UserDomainInterface,
+	) *rest_errors.RestError
+
 	FindUserByEmail(
 		email string,
 	) (model.UserDomainInterface, *rest_errors.RestError)

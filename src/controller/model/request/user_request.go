@@ -35,18 +35,6 @@ type UserRequest struct {
 }
 
 type UserUpdateRequest struct {
-	// User's name (required, minimum of 4 characters, maximum of 100 characters).
-	// Example: John Doe
-	// @json
-	// @jsonTag name
-	// @jsonExample John Doe
-	// @binding required,min=4,max=100
-	Name string `json:"name" binding:"required,min=4,max=100" example:"John Doe"`
-
-	// User's age (required, must be between 1 and 140).
-	// @json
-	// @jsonTag age
-	// @jsonExample 30
-	// @binding required,min=1,max=140
-	Age int8 `json:"age" binding:"required,min=1,max=140" example:"30"`
+	Name string `json:"name" binding:"omitempty,min=4,max=100" example:"John Doe"`
+	Age  int8   `json:"age" binding:"omitempty,min=1,max=140" example:"30"`
 }

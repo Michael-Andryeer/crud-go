@@ -2,13 +2,14 @@ package controller
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/Michael-Andryeer/crud-go/src/configuration/logger"
+	"github.com/Michael-Andryeer/crud-go/src/configuration/rest_errors"
 	"github.com/Michael-Andryeer/crud-go/src/configuration/validation"
 	"github.com/Michael-Andryeer/crud-go/src/controller/model/request"
 	"github.com/Michael-Andryeer/crud-go/src/model"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 )
 
@@ -19,15 +20,20 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 	)
 
 	var userRequest request.UserUpdateRequest
-	userId := c.Param("userId")
 
-	if err := c.ShouldBindJSON(&userRequest); err != nil || strings.TrimSpace(userId) == "" { // Se mandar um Id vazio da erro
+	if err := c.ShouldBindJSON(&userRequest); err != nil { // Se mandar um Id vazio da erro
 		logger.Error("Error trying to validate user info", err,
 			zap.String("journey", "updateUser"),
 		)
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
+	}
+
+	userId := c.Param("userId")
+	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
+		errRest := rest_errors.NewBadRequestError("Invalid userId, must be a hex value")
+		c.JSON(errRest.Code, errRest)
 	}
 
 	domain := model.NewUserUpdateDomain(userRequest.Name, userRequest.Age)

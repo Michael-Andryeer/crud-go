@@ -16,13 +16,13 @@ func (ud *userDomainService) UpdateUser(
 		zap.String("journey", "updateUser"),
 	)
 
-	err := ud.userRepository.(userDomain)
+	err := ud.userRepository.UpdateUser(userId, userDomain)
 	if err != nil {
 		logger.Error("Error trying to call repository",
 			err,
 			zap.String("journey", "updateUser"),
 		)
-		return nil, err
+		return err
 	}
 
 	logger.Info("updateUser model executed successfully",
