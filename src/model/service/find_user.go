@@ -26,5 +26,5 @@ func (ud *userDomainService) findUserByEmailAndPasswordServices(email, password 
 	logger.Info("Init FindUserByEmailAndPasswordServices service",
 		zap.String("journey", "FindUserByEmailAndPasswordServices"),
 	)
-	return ud.userRepository.FindUserByEmail(email)
+	return ud.userRepository.FindUserByEmailAndPassword(email, password)
 }
